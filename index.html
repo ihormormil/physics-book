@@ -137,24 +137,26 @@
             letter-spacing: 1.5px;
         }
 
-        /* Великий атом */
+        /* Великий атом - СІРИЙ/СРІБЛЯСТИЙ (однаковий для всіх) */
         .main-atom {
             font-size: 7rem;
             margin: 1.5rem 0;
             animation: pulse 3s infinite;
-            filter: drop-shadow(0 0 15px rgba(212,175,55,0.3));
+            filter: drop-shadow(0 0 15px rgba(192,192,192,0.3));
+            color: #c0c0c0;
+            display: inline-block;
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); text-shadow: 0 0 0px rgba(212,175,55,0); }
-            50% { transform: scale(1.08); text-shadow: 0 0 30px rgba(212,175,55,0.5); }
+            0%, 100% { transform: scale(1); text-shadow: 0 0 0px rgba(192,192,192,0); }
+            50% { transform: scale(1.08); text-shadow: 0 0 30px rgba(192,192,192,0.4); }
         }
 
         /* Декоративна рамка навколо атома */
         .atom-frame {
             display: inline-block;
             padding: 15px 35px;
-            border: 2px solid rgba(212,175,55,0.4);
+            border: 2px solid rgba(192,192,192,0.4);
             border-radius: 80px;
             margin: 15px 0;
         }
@@ -181,43 +183,43 @@
             letter-spacing: 1px;
         }
 
-        /* Декоративні елементи книжки (кути) */
+        /* Декоративні елементи книжки (кути) - ледь помітні */
         .corner {
             position: absolute;
             width: 45px;
             height: 45px;
-            border-color: #d4af37;
+            border-color: rgba(212,175,55,0.25);
             border-style: solid;
             border-width: 0;
-            opacity: 0.4;
+            opacity: 0.3;
         }
 
         .corner-tl {
             top: 20px;
             left: 20px;
-            border-top-width: 3px;
-            border-left-width: 3px;
+            border-top-width: 2px;
+            border-left-width: 2px;
         }
 
         .corner-tr {
             top: 20px;
             right: 20px;
-            border-top-width: 3px;
-            border-right-width: 3px;
+            border-top-width: 2px;
+            border-right-width: 2px;
         }
 
         .corner-bl {
             bottom: 20px;
             left: 20px;
-            border-bottom-width: 3px;
-            border-left-width: 3px;
+            border-bottom-width: 2px;
+            border-left-width: 2px;
         }
 
         .corner-br {
             bottom: 20px;
             right: 20px;
-            border-bottom-width: 3px;
-            border-right-width: 3px;
+            border-bottom-width: 2px;
+            border-right-width: 2px;
         }
 
         /* Стрілка праворуч */
@@ -290,7 +292,7 @@
         }
 
         /* ============================================ */
-        /* Адаптація ДЛЯ МОБІЛЬНИХ (зміни тут) */
+        /* АДАПТАЦІЯ ДЛЯ МОБІЛЬНИХ - ОПТИМАЛЬНІ РОЗМІРИ */
         /* ============================================ */
         @media (max-width: 768px) {
             body {
@@ -302,175 +304,160 @@
             }
             
             .cover-content {
-                padding: 25px 35px 30px 55px;
+                padding: 30px 30px 35px 55px;
             }
             
             .book-spine {
-                width: 28px;
+                width: 30px;
             }
             
-            /* Зменшуємо "шапочку" - Міністерство, Коледж, Університет */
+            /* Шапочка - помірно зменшена */
             .top-ministry {
-                margin-bottom: 1rem;
+                margin-bottom: 1.5rem;
             }
             
             .ministry {
-                font-size: 0.55rem;
+                font-size: 0.7rem;
                 letter-spacing: 1px;
-                margin-bottom: 0.3rem;
             }
             
             .college {
-                font-size: 0.75rem;
-                margin-bottom: 0.2rem;
+                font-size: 0.9rem;
             }
             
             .university {
-                font-size: 0.55rem;
-                line-height: 1.3;
+                font-size: 0.7rem;
             }
             
-            /* Піднімаємо заголовок та підзаголовок вище */
+            /* Заголовки - комфортні для читання */
             .main-title {
-                font-size: 2rem;
-                margin: 0.5rem 0 0.3rem;
-                letter-spacing: 2px;
+                font-size: 2.2rem;
+                margin: 0.8rem 0 0.4rem;
             }
             
             .title-line {
-                width: 60px;
-                margin: 10px auto;
+                width: 70px;
+                margin: 12px auto;
+            }
+            
+            .subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            /* Атом - видимий і гарний */
+            .main-atom {
+                font-size: 3.8rem;
+                margin: 0.8rem 0;
+            }
+            
+            .atom-frame {
+                padding: 10px 22px;
+                margin: 8px 0;
+            }
+            
+            /* Автор */
+            .author {
+                margin-top: 1.5rem;
+                padding-top: 1.2rem;
+            }
+            
+            .author-label {
+                font-size: 0.8rem;
+            }
+            
+            .author-name {
+                font-size: 1rem;
+            }
+            
+            /* Кути - ледь помітні (як на комп'ютері) */
+            .corner {
+                width: 35px;
+                height: 35px;
+                opacity: 0.2;
+            }
+            
+            .corner-tl, .corner-tr {
+                top: 12px;
+            }
+            
+            .corner-tl, .corner-bl {
+                left: 12px;
+            }
+            
+            .corner-tr, .corner-br {
+                right: 12px;
+            }
+            
+            .corner-bl, .corner-br {
+                bottom: 12px;
+            }
+            
+            /* Стрілка */
+            .next-arrow {
+                right: 10px;
+                top: 50%;
+            }
+            
+            .triangle {
+                border-left-width: 28px;
+                border-top-width: 18px;
+                border-bottom-width: 18px;
+            }
+            
+            .arrow-text {
+                font-size: 8px;
+                margin-top: 5px;
+            }
+        }
+
+        /* Для дуже маленьких телефонів */
+        @media (max-width: 480px) {
+            .cover-content {
+                padding: 20px 20px 25px 45px;
+            }
+            
+            .book-spine {
+                width: 25px;
+            }
+            
+            .ministry {
+                font-size: 0.65rem;
+            }
+            
+            .college {
+                font-size: 0.85rem;
+            }
+            
+            .university {
+                font-size: 0.6rem;
+            }
+            
+            .main-title {
+                font-size: 1.9rem;
             }
             
             .subtitle {
                 font-size: 0.85rem;
-                margin-bottom: 0.5rem;
-                letter-spacing: 1px;
             }
             
-            /* Атом трохи менший */
             .main-atom {
-                font-size: 3rem;
-                margin: 0.5rem 0;
+                font-size: 3.2rem;
             }
             
             .atom-frame {
-                padding: 6px 18px;
-                margin: 5px 0;
+                padding: 8px 18px;
             }
             
-            /* Автор менший */
-            .author {
-                margin-top: 1rem;
-                padding-top: 1rem;
+            .triangle {
+                border-left-width: 24px;
+                border-top-width: 15px;
+                border-bottom-width: 15px;
             }
             
-            .author-label {
-                font-size: 0.7rem;
-            }
-            
-            .author-name {
-                font-size: 0.9rem;
-            }
-            
-            /* Кути менші */
             .corner {
                 width: 25px;
                 height: 25px;
-                border-width: 2px;
-            }
-            
-            .corner-tl, .corner-tr {
-                top: 10px;
-            }
-            
-            .corner-tl, .corner-bl {
-                left: 10px;
-            }
-            
-            .corner-tr, .corner-br {
-                right: 10px;
-            }
-            
-            .corner-bl, .corner-br {
-                bottom: 10px;
-            }
-            
-            /* Стрілка - трохи вище і менша */
-            .next-arrow {
-                right: 8px;
-                top: 55%;
-            }
-            
-            .triangle {
-                border-left-width: 22px;
-                border-top-width: 16px;
-                border-bottom-width: 16px;
-            }
-            
-            .arrow-text {
-                font-size: 7px;
-                margin-top: 3px;
-                letter-spacing: 0.5px;
-            }
-        }
-
-        /* Для дуже маленьких телефонів (до 480px) */
-        @media (max-width: 480px) {
-            .cover-content {
-                padding: 15px 20px 20px 40px;
-            }
-            
-            .book-spine {
-                width: 22px;
-            }
-            
-            .ministry {
-                font-size: 0.5rem;
-            }
-            
-            .college {
-                font-size: 0.7rem;
-            }
-            
-            .university {
-                font-size: 0.5rem;
-            }
-            
-            .main-title {
-                font-size: 1.6rem;
-                margin: 0.3rem 0;
-            }
-            
-            .subtitle {
-                font-size: 0.75rem;
-            }
-            
-            .main-atom {
-                font-size: 2.5rem;
-            }
-            
-            .atom-frame {
-                padding: 4px 12px;
-            }
-            
-            .author-name {
-                font-size: 0.8rem;
-            }
-            
-            .next-arrow {
-                right: 5px;
-                top: 58%;
-            }
-            
-            .triangle {
-                border-left-width: 18px;
-                border-top-width: 12px;
-                border-bottom-width: 12px;
-            }
-            
-            .arrow-text {
-                font-size: 6px;
             }
         }
     </style>
