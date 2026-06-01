@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Фізика - Інтерактивний навчальний посібник</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+            position: relative;
+            background: #8B7355;
+        }
+
+        /* Фонові формули (навколо книжки) */
+        .physics-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 3rem;
+            color: rgba(139, 115, 85, 0.15);
+            font-weight: bold;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        /* Книжка-обкладинка - ЗБІЛЬШЕНА */
+        .book-cover {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            background: linear-gradient(135deg, #1a3a5c 0%, #0d2137 100%);
+            border-radius: 15px 10px 10px 15px;
+            box-shadow: 
+                25px 25px 50px rgba(0,0,0,0.5),
+                -8px 0 20px rgba(0,0,0,0.3),
+                inset -1px 0 0 rgba(255,255,255,0.1);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Імітація корінця книги - ШИРШИЙ */
+        .book-spine {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 45px;
+            height: 100%;
+            background: linear-gradient(90deg, #0a1525 0%, #1a2a4a 50%, #0a1525 100%);
+            border-radius: 12px 0 0 12px;
+            z-index: 2;
+            box-shadow: inset -2px 0 0 rgba(255,255,255,0.1);
+        }
+
+        /* Основний вміст обкладинки - БІЛЬШЕ ПОВІТРЯ */
+        .cover-content {
+            position: relative;
+            padding: 60px 80px 60px 100px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* Блок з Міністерством */
+        .top-ministry {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .ministry {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .college {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #d4af37;
+            margin-bottom: 0.35rem;
+        }
+
+        .university {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            font-style: normal;
+            line-height: 1.5;
+        }
+
+        /* Основний заголовок - БІЛЬШИЙ */
+        .main-title {
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 700;
+            color: #d4af37;
+            margin: 2rem 0 0.8rem;
+            letter-spacing: 4px;
+            text-shadow: 0 0 25px rgba(212,175,55,0.3);
+            position: relative;
+        }
+
+        /* Декоративна лінія */
+        .title-line {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, #d4af37, transparent);
+            margin: 20px auto;
+        }
+
+        /* Підзаголовок */
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+        }
+
+        /* Великий атом - БІЛЬШИЙ */
+        .main-atom {
+            font-size: 7rem;
+            margin: 1.5rem 0;
+            animation: pulse 3s infinite;
+            filter: drop-shadow(0 0 15px rgba(212,175,55,0.3));
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 0px rgba(212,175,55,0); }
+            50% { transform: scale(1.08); text-shadow: 0 0 30px rgba(212,175,55,0.5); }
+        }
+
+        /* Декоративна рамка навколо атома - ТОВЩА */
+        .atom-frame {
+            display: inline-block;
+            padding: 15px 35px;
+            border: 2px solid rgba(212,175,55,0.4);
+            border-radius: 80px;
+            margin: 15px 0;
+        }
+
+        /* Автор */
+        .author {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            display: inline-block;
+            width: auto;
+        }
+
+        .author-label {
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .author-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #d4af37;
+            letter-spacing: 1px;
+        }
+
+        /* Декоративні елементи книжки (кути) - БІЛЬШІ */
+        .corner {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            border-color: #d4af37;
+            border-style: solid;
+            border-width: 0;
+            opacity: 0.4;
+        }
+
+        .corner-tl {
+            top: 20px;
+            left: 20px;
+            border-top-width: 3px;
+            border-left-width: 3px;
+        }
+
+        .corner-tr {
+            top: 20px;
+            right: 20px;
+            border-top-width: 3px;
+            border-right-width: 3px;
+        }
+
+        .corner-bl {
+            bottom: 20px;
+            left: 20px;
+            border-bottom-width: 3px;
+            border-left-width: 3px;
+        }
+
+        .corner-br {
+            bottom: 20px;
+            right: 20px;
+            border-bottom-width: 3px;
+            border-right-width: 3px;
+        }
+
+        /* Стрілка праворуч - БІЛЬША */
+        .next-arrow {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            text-align: center;
+            z-index: 10;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .next-arrow:hover {
+            transform: translateY(-50%) scale(1.15);
+            opacity: 1;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left-width: 40px;
+            border-left-style: solid;
+            border-left-color: #d4af37;
+            border-top: 28px solid transparent;
+            border-bottom: 28px solid transparent;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+        }
+
+        .arrow-text {
+            font-size: 12px;
+            color: #d4af37;
+            margin-top: 8px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
+
+        /* Імітація сторінок знизу - БІЛЬША */
+        .page-edges {
+            position: absolute;
+            bottom: -12px;
+            left: 12px;
+            right: 12px;
+            height: 12px;
+            background: linear-gradient(180deg, #e8e0d0 0%, #c4b8a8 100%);
+            border-radius: 0 0 6px 6px;
+            z-index: 0;
+        }
+
+        .page-edges::before,
+        .page-edges::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 8px;
+            right: 8px;
+            height: 6px;
+            background: #d4c8b8;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .page-edges::after {
+            bottom: -9px;
+            left: 6px;
+            right: 6px;
+            height: 5px;
+            background: #c0b4a4;
+        }
+
+        /* Адаптація для мобільних (зменшуємо назад для телефонів) */
+        @media (max-width: 768px) {
+            body {
+                padding: 30px 20px;
+            }
+            
+            .book-cover {
+                max-width: 95%;
+            }
+            
+            .cover-content {
+                padding: 30px 35px 30px 60px;
+            }
+            
+            .book-spine {
+                width: 30px;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            
+            .main-atom {
+                font-size: 4rem;
+            }
+            
+            .atom-frame {
+                padding: 10px 25px;
+            }
+            
+            .college {
+                font-size: 1rem;
+            }
+            
+            .university {
+                font-size: 0.75rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .author-name {
+                font-size: 1.1rem;
+            }
+            
+            .corner {
+                width: 30px;
+                height: 30px;
+                border-width: 2px;
+            }
+            
+            .triangle {
+                border-left-width: 28px;
+                border-top-width: 20px;
+                border-bottom-width: 20px;
+            }
+            
+            .arrow-text {
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cover-content {
+                padding: 20px 20px 20px 45px;
+            }
+            
+            .book-spine {
+                width: 22px;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .main-atom {
+                font-size: 3rem;
+            }
+            
+            .college {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Фонові формули -->
+    <div class="physics-bg">
+        E = mc² &nbsp;&nbsp; F = ma &nbsp;&nbsp; λ = c/f &nbsp;&nbsp; U = RI &nbsp;&nbsp; ∇·E = ρ/ε₀
+    </div>
+
+    <!-- Книжка-обкладинка -->
+    <div class="book-cover">
+        <div class="book-spine"></div>
+        
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+        
+        <div class="cover-content">
+            <div class="top-ministry">
+                <div class="ministry">МІНІСТЕРСТВО ОБОРОНИ УКРАЇНИ</div>
+                <div class="college">ВІЙСЬКОВИЙ КОЛЕДЖ СЕРЖАНТСЬКОГО СКЛАДУ</div>
+                <div class="university">ХАРКІВСЬКОГО НАЦІОНАЛЬНОГО УНІВЕРСИТЕТУ ПОВІТРЯНИХ СИЛ<br>імені ІВАНА КОЖЕДУБА</div>
+            </div>
+            
+            <h1 class="main-title">ФІЗИКА</h1>
+            <div class="title-line"></div>
+            <div class="subtitle">Інтерактивний навчальний посібник</div>
+            
+            <div class="atom-frame">
+                <div class="main-atom">⚛️</div>
+            </div>
+            
+            <div class="author">
+                <div class="author-label">👨‍💻 Автор і розробник:</div>
+                <div class="author-name">Ігор Морміль</div>
+            </div>
+        </div>
+        
+        <div class="page-edges"></div>
+        
+        <div class="next-arrow" onclick="goToZmist()">
+            <div class="triangle"></div>
+            <div class="arrow-text">ГОРТАТИ</div>
+        </div>
+    </div>
+
+    <script>
+        function goToZmist() {
+            window.location.href = '/zmist';
+        }
+        
+        let touchStartX = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                goToZmist();
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                goToZmist();
+            }
+        });
+    </script>
+</body>
+</html>
